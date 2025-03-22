@@ -1,0 +1,112 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            text-align: center;
+            background-image: url(https://eventsempire.in/wp-content/uploads/2024/08/1000266469.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            color: white;
+           
+            
+            
+            
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        main {
+            width: 50%;
+            margin: 100px auto;
+            background:transparent;
+            
+            padding: 3px;
+            border-radius: 10px;
+           
+            border: black double;
+            
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            width: 50%;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 50%;
+            margin: 5px 0;
+            padding: 2px;
+            font-size: 16px;
+            background-color:white;
+            border: black double;
+        
+        }
+
+        button {
+            background:rgb(67, 131, 156);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .services-container {
+text-align:left;
+            align-items: flex-start;
+            width: 80%;
+            margin: 2px auto;
+            background: transparent;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .services-container label {
+            margin: 2px 0; 
+            font-weight: normal;
+        }
+
+        #final-details {
+            text-align: left;
+            margin-top: 30px;
+            padding: 20px;
+            background:transparent;
+            color: rgb(38, 2, 71);
+            border-radius: 10px;
+        }
+
+        #totalCost {
+            font-weight: bold;
+            color: #155724;
+            margin-top: 10px;
+        }
+        .login 
+        {
+            background-color:transparent;
+    
+        
+        }
