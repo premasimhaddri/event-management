@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planning Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        main {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            width: 80%;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 80%;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 16px;
+            background-color: powderblue;
+            border: hotpink double;
+        
+        }
+
+        button {
+            background:black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .services-container {
+text-align:left;
+            align-items: flex-start;
+            width: 80%;
+            margin: 10px auto;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .services-container label {
+            margin: 4px 0; 
+            font-weight: normal;
+        }
+
+        #final-details {
+            text-align: left;
+            margin-top: 30px;
+            padding: 20px;
+            background: #e9ffe9;
+            border: 1px solid #28a745;
+            border-radius: 10px;
+        }
+
+        #totalCost {
+            font-weight: bold;
+            color: #155724;
+            margin-top: 10px;
+        }
+        .login
+        {
+            background-color: powderblue;
+    
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Event Planning Management System</h1>
+    </header>
+
+    <main>
+        <section id="step1" class="login">
+            <form id="loginForm">
+                <label for="customerName">Full Name:</label>
+                <input  type="text" id="customerName" placeholder="Enter your full name" required>
+
+                <label for="customerEmail">Email Address:</label>
+                <input type="email" id="customerEmail" placeholder="Enter your email" required>
+
+                <label for="customerPassword">Password:</label>
+                <input type="password" id="customerPassword" placeholder="Enter your password" required>
+
+                <button type="submit">Login & Continue</button>
+            </form>
+        </section>
+
+        <section id="step2" class="login hidden">
+            <form id="eventDetailsForm" style="border-color: rgba(255, 105, 105, 0.929);">
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" required>
+
+                <label for="eventLocation">Event Location:</label>
+                <input type="text" id="eventLocation" placeholder="Enter event location" required>
+
+                <label for="eventBudget">Estimated Budget (₹):</label>
+                <input type="number" id="eventBudget" placeholder="Enter your budget" min="1" required>
+
+                <label for="eventType">Type of Event:</label>
+                <select id="eventType" required>
+                    <option value="" disabled selected>-- Select Event Type --</option>
+                    <option value="Birthday Party">Birthday Party</option>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Reception">Reception</option>
+                    <option value="Corporate Event">Corporate Event</option>
+                    <option value="Baby Shower">Baby Shower</option>
+                    <option value="Anniversary">Anniversary</option>
+                </select>
+
+                <label for="guestCount">Expected Number of Guests:</label>
+                <input type="number" id="guestCount" placeholder="Enter number of guests" min="1" required>
+
+                <div class="login services-container">
+                    <strong>Select Additional Services:</strong>
+                    <label><input type="checkbox" class="service-checkbox" value="Decoration" data-price="7000"> Decoration (₹7,000)</label>
+                    <label><input type="checkbox" class="service-checkbox" value="Catering" data-price="5000"> Catering (₹5,000)</label>
+                    <label><input type="checkbox" class="service-checkbox" value="Music" data-price="4000"> Music (₹4,000)</label>
+                    <label><input type="checkbox" class="service-checkbox" value="Photography" data-price="10000"> Photography (₹10,000)</label>
+                    <p id="totalCost">Total Cost: ₹<span id="calculatedCost">0</span></p>
+                </div>
+
+                <button type="submit">Submit Event Details</button>
+            </form>
+        </section>
+
+        <div id="final-details" class="hidden">
+            <h2>Event Summary</h2>
+            <p><strong>Customer Name:</strong> <span id="displayName"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Event Type:</strong> <span id="displayEventType"></span></p>
+            <p><strong>Event Date:</strong> <span id="displayEventDate"></span></p>
+            <p><strong>Event Location:</strong> <span id="displayEventLocation"></span></p>
+            <p><strong>Estimated Budget:</strong> ₹<span id="displayBudget"></span></p>
+            <p><strong>Expected Guests:</strong> <span id="displayGuests"></span></p>
+            <p><strong>Selected Services:</strong> <span id="displayServices"></span></p>
+            <p><strong>Total Estimated Cost:</strong> ₹<span id="displayTotalCost"></span></p>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("customerName").value;
+            const email = document.getElementById("customerEmail").value;
+            sessionStorage.setItem("customerName", name);
+            sessionStorage.setItem("customerEmail", email);
+            document.getElementById("step1").classList.add("hidden");
+            document.getElementById("step2").classList.remove("hidden");
+        });
+
+        const serviceCheckboxes = document.querySelectorAll(".service-checkbox");
+        const budgetInput = document.getElementById("eventBudget");
+        const calculatedCost = document.getElementById("calculatedCost");
+
+        function updateTotalCost() {
+            let baseCost = parseInt(budgetInput.value) || 0;
+            let additionalCost = 0;
+            serviceCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    additionalCost += parseInt(checkbox.getAttribute("data-price"));
+                }
+            });
+            calculatedCost.textContent = baseCost + additionalCost;
+        }
+
+        serviceCheckboxes.forEach((checkbox) =>
+            checkbox.addEventListener("change", updateTotalCost)
+        );
+        budgetInput.addEventListener("input", updateTotalCost);
+
+        document.getElementById("eventDetailsForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const eventDate = document.getElementById("eventDate").value;
+            const eventLocation = document.getElementById("eventLocation").value;
+            const budget = document.getElementById("eventBudget").value;
+            const eventType = document.getElementById("eventType").value;
+            const guestCount = document.getElementById("guestCount").value;
+
+            const selectedServices = [];
+            let totalCost = parseInt(budget) || 0;
+            serviceCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedServices.push(checkbox.value);
+                    totalCost += parseInt(checkbox.getAttribute("data-price"));
+                }
+            });
+
+            document.getElementById("displayName").textContent = sessionStorage.getItem("customerName");
+            document.getElementById("displayEmail").textContent = sessionStorage.getItem("customerEmail");
+            document.getElementById("displayEventType").textContent = eventType;
+            document.getElementById("displayEventDate").textContent = eventDate;
+            document.getElementById("displayEventLocation").textContent = eventLocation;
+            document.getElementById("displayBudget").textContent = budget;
+            document.getElementById("displayGuests").textContent = guestCount;
+            document.getElementById("displayServices").textContent = selectedServices.length > 0 ? selectedServices.join(", ") : "None";
+            document.getElementById("displayTotalCost").textContent = totalCost;
+
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("final-details").classList.remove("hidden");
+        });
+    </script>
+
+</body>
+</html>
